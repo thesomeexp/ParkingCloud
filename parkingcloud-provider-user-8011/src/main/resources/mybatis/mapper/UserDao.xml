@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.dao.UserDao">
+
+    <resultMap type="cn.edu.lingnan.entity.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          id, name, password, salt, phone, role, score
+        from parking.user
+        where id = #{id}
+    </select>
+    <select id="queryByName" resultMap="UserMap">
+        select
+          id, name, password, salt, phone, role, score
+        from parking.user
+        where name = #{name}
+    </select>
+    <select id="queryByPhone" resultMap="UserMap">
+        select
+          id, name, password, salt, phone, role, score
+        from parking.user
+        where phone = #{phone}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          id, name, password, salt, phone, role, score
+        from parking.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          id, name, password, salt, phone, role, score
+        from parking.user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="salt != null and salt != ''">
+                and salt = #{salt}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into parking.user(name, password, salt, phone, role, score)
+        values (#{name}, #{password}, #{salt}, #{phone}, #{role}, #{score})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update parking.user
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+            <if test="score != null">
+                score = #{score}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from parking.user where id = #{id}
+    </delete>
+
+    <!--通过主键修改数据-->
+    <update id="updateUserScore">
+        update parking.user
+        <set>
+            score = score + #{score}
+        </set>
+        where id = #{id}
+    </update>
+
+
+
+</mapper>

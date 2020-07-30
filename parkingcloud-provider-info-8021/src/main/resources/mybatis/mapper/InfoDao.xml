@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.dao.InfoDao">
+
+    <resultMap type="cn.edu.lingnan.entity.Info" id="InfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="longitude" column="longitude" jdbcType="OTHER"/>
+        <result property="latitude" column="latitude" jdbcType="OTHER"/>
+        <result property="geohash" column="geoHash" jdbcType="VARCHAR"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="infosubmitdate" column="infoSubmitDate" jdbcType="TIMESTAMP"/>
+        <result property="stateupdatedate" column="stateUpdateDate" jdbcType="TIMESTAMP"/>
+        <result property="t0" column="t0" jdbcType="INTEGER"/>
+        <result property="t1" column="t1" jdbcType="INTEGER"/>
+        <result property="t2" column="t2" jdbcType="INTEGER"/>
+        <result property="t3" column="t3" jdbcType="INTEGER"/>
+        <result property="t4" column="t4" jdbcType="INTEGER"/>
+        <result property="t5" column="t5" jdbcType="INTEGER"/>
+        <result property="t6" column="t6" jdbcType="INTEGER"/>
+        <result property="t7" column="t7" jdbcType="INTEGER"/>
+        <result property="t8" column="t8" jdbcType="INTEGER"/>
+        <result property="t9" column="t9" jdbcType="INTEGER"/>
+        <result property="t10" column="t10" jdbcType="INTEGER"/>
+        <result property="t11" column="t11" jdbcType="INTEGER"/>
+        <result property="t12" column="t12" jdbcType="INTEGER"/>
+        <result property="t13" column="t13" jdbcType="INTEGER"/>
+        <result property="t14" column="t14" jdbcType="INTEGER"/>
+        <result property="t15" column="t15" jdbcType="INTEGER"/>
+        <result property="t16" column="t16" jdbcType="INTEGER"/>
+        <result property="t17" column="t17" jdbcType="INTEGER"/>
+        <result property="t18" column="t18" jdbcType="INTEGER"/>
+        <result property="t19" column="t19" jdbcType="INTEGER"/>
+        <result property="t20" column="t20" jdbcType="INTEGER"/>
+        <result property="t21" column="t21" jdbcType="INTEGER"/>
+        <result property="t22" column="t22" jdbcType="INTEGER"/>
+        <result property="t23" column="t23" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="InfoMap">
+        select
+          id, name, content, longitude, latitude, geoHash, uid, state, infoSubmitDate, stateUpdateDate, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23
+        from parking.info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="InfoMap">
+        select
+          id, name, content, longitude, latitude, geoHash, uid, state, infoSubmitDate, stateUpdateDate, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23
+        from parking.info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="InfoMap">
+        select
+          id, name, content, longitude, latitude, geoHash, uid, state, infoSubmitDate, stateUpdateDate, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23
+        from parking.info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="longitude != null">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null">
+                and latitude = #{latitude}
+            </if>
+            <if test="geohash != null and geohash != ''">
+                and geoHash like #{geohash}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="infosubmitdate != null">
+                and infoSubmitDate = #{infosubmitdate}
+            </if>
+            <if test="stateupdatedate != null">
+                and stateUpdateDate = #{stateupdatedate}
+            </if>
+            <if test="t0 != null">
+                and t0 = #{t0}
+            </if>
+            <if test="t1 != null">
+                and t1 = #{t1}
+            </if>
+            <if test="t2 != null">
+                and t2 = #{t2}
+            </if>
+            <if test="t3 != null">
+                and t3 = #{t3}
+            </if>
+            <if test="t4 != null">
+                and t4 = #{t4}
+            </if>
+            <if test="t5 != null">
+                and t5 = #{t5}
+            </if>
+            <if test="t6 != null">
+                and t6 = #{t6}
+            </if>
+            <if test="t7 != null">
+                and t7 = #{t7}
+            </if>
+            <if test="t8 != null">
+                and t8 = #{t8}
+            </if>
+            <if test="t9 != null">
+                and t9 = #{t9}
+            </if>
+            <if test="t10 != null">
+                and t10 = #{t10}
+            </if>
+            <if test="t11 != null">
+                and t11 = #{t11}
+            </if>
+            <if test="t12 != null">
+                and t12 = #{t12}
+            </if>
+            <if test="t13 != null">
+                and t13 = #{t13}
+            </if>
+            <if test="t14 != null">
+                and t14 = #{t14}
+            </if>
+            <if test="t15 != null">
+                and t15 = #{t15}
+            </if>
+            <if test="t16 != null">
+                and t16 = #{t16}
+            </if>
+            <if test="t17 != null">
+                and t17 = #{t17}
+            </if>
+            <if test="t18 != null">
+                and t18 = #{t18}
+            </if>
+            <if test="t19 != null">
+                and t19 = #{t19}
+            </if>
+            <if test="t20 != null">
+                and t20 = #{t20}
+            </if>
+            <if test="t21 != null">
+                and t21 = #{t21}
+            </if>
+            <if test="t22 != null">
+                and t22 = #{t22}
+            </if>
+            <if test="t23 != null">
+                and t23 = #{t23}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into parking.info(name, content, longitude, latitude, geoHash, uid, state, infoSubmitDate, stateUpdateDate, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23)
+        values (#{name}, #{content}, #{longitude}, #{latitude}, #{geohash}, #{uid}, #{state}, #{infosubmitdate}, #{stateupdatedate}, #{t0}, #{t1}, #{t2}, #{t3}, #{t4}, #{t5}, #{t6}, #{t7}, #{t8}, #{t9}, #{t10}, #{t11}, #{t12}, #{t13}, #{t14}, #{t15}, #{t16}, #{t17}, #{t18}, #{t19}, #{t20}, #{t21}, #{t22}, #{t23})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateT">
+        update parking.info
+        <set>
+            stateUpdateDate = now(),
+            ${parameterT} = #{valueT}
+        </set>
+        where id = #{pid}
+    </update>
+
+
+    <!--通过主键修改T-->
+    <update id="update">
+        update parking.info
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude},
+            </if>
+            <if test="geohash != null and geohash != ''">
+                geoHash = #{geohash},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="infosubmitdate != null">
+                infoSubmitDate = #{infosubmitdate},
+            </if>
+            <if test="stateupdatedate != null">
+                stateUpdateDate = #{stateupdatedate},
+            </if>
+            <if test="t0 != null">
+                t0 = #{t0},
+            </if>
+            <if test="t1 != null">
+                t1 = #{t1},
+            </if>
+            <if test="t2 != null">
+                t2 = #{t2},
+            </if>
+            <if test="t3 != null">
+                t3 = #{t3},
+            </if>
+            <if test="t4 != null">
+                t4 = #{t4},
+            </if>
+            <if test="t5 != null">
+                t5 = #{t5},
+            </if>
+            <if test="t6 != null">
+                t6 = #{t6},
+            </if>
+            <if test="t7 != null">
+                t7 = #{t7},
+            </if>
+            <if test="t8 != null">
+                t8 = #{t8},
+            </if>
+            <if test="t9 != null">
+                t9 = #{t9},
+            </if>
+            <if test="t10 != null">
+                t10 = #{t10},
+            </if>
+            <if test="t11 != null">
+                t11 = #{t11},
+            </if>
+            <if test="t12 != null">
+                t12 = #{t12},
+            </if>
+            <if test="t13 != null">
+                t13 = #{t13},
+            </if>
+            <if test="t14 != null">
+                t14 = #{t14},
+            </if>
+            <if test="t15 != null">
+                t15 = #{t15},
+            </if>
+            <if test="t16 != null">
+                t16 = #{t16},
+            </if>
+            <if test="t17 != null">
+                t17 = #{t17},
+            </if>
+            <if test="t18 != null">
+                t18 = #{t18},
+            </if>
+            <if test="t19 != null">
+                t19 = #{t19},
+            </if>
+            <if test="t20 != null">
+                t20 = #{t20},
+            </if>
+            <if test="t21 != null">
+                t21 = #{t21},
+            </if>
+            <if test="t22 != null">
+                t22 = #{t22},
+            </if>
+            <if test="t23 != null">
+                t23 = #{t23},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from parking.info where id = #{id}
+    </delete>
+
+</mapper>

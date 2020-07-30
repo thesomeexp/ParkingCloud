@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.dao.TempDao">
+
+    <resultMap type="cn.edu.lingnan.entity.Temp" id="TempMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="pid" column="pid" jdbcType="INTEGER"/>
+        <result property="submitdate" column="submitDate" jdbcType="TIMESTAMP"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="useful" column="useful" jdbcType="INTEGER"/>
+        <result property="bad" column="bad" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TempMap">
+        select
+          id, uid, pid, submitDate, state
+        from parking.temp
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TempMap">
+        select
+          id, uid, pid, submitDate, state, useful, bad
+        from parking.temp
+        limit #{offset}, #{limit}
+        order by submitDate DESC
+    </select>
+
+    <!--查询一个停车场最后几条数据-->
+    <select id="queryLastByLimitDesc" resultMap="TempMap">
+        select
+          id, uid, pid, submitDate, state, useful, bad
+        from parking.temp
+        where pid = #{pid}
+        order by id DESC
+        limit  #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TempMap">
+        select
+          id, uid, pid, submitDate, state
+        from parking.temp
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="pid != null">
+                and pid = #{pid}
+            </if>
+            <if test="submitdate != null">
+                and submitDate = #{submitdate}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="usefuc != null">
+                and usefuc = #{usefuc}
+            </if>
+            <if test="bad != null">
+                and bad = #{bad}
+            </if>
+        </where>
+    </select>
+
+    <!--查询最近30分钟内提交的temp-->
+    <select id="getByPidAndUidAndSubmitDateAfterThan" resultMap="TempMap">
+        select
+        id, uid, pid, submitDate, state, useful, bad
+        from parking.temp
+        <where>
+                and uid = #{uid}
+                and pid = #{pid}
+                and submitDate &gt; #{beforedate}
+        </where>
+    </select>
+
+    <!--新增所有列, 然后改变插入的temp id为数据库插入后新的id-->
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.edu.lingnan.entity.Temp" useGeneratedKeys="true">
+        insert into parking.temp(uid, pid, submitDate, state, useful, bad)
+        values (#{uid}, #{pid}, #{submitdate}, #{state}, 0, 0)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update parking.temp
+        <set>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="submitdate != null">
+                submitDate = #{submitdate},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="useful != null">
+                useful = #{useful},
+            </if>
+            <if test="bad != null">
+                bad = #{bad},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from parking.temp where id = #{id}
+    </delete>
+
+    <update id="addUsefulCount">
+        update parking.temp set useful = useful + 1 where id = #{tid};
+    </update>
+
+    <update id="updateUsefulCount">
+        update parking.temp set useful = useful + 1, bad = bad - 1 where id = #{tid};
+    </update>
+
+    <update id="addBadCount">
+        update parking.temp set bad = bad + 1 where id = #{tid};
+    </update>
+
+    <update id="updateBadCount">
+        update parking.temp set useful = useful - 1, bad = bad + 1 where id = #{tid};
+    </update>
+
+</mapper>

@@ -1,0 +1,51 @@
+server:
+  port: 9001
+
+
+
+spring:
+  application:
+    name: parkingcloud-zuul   #该微服务名称
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://192.168.1.128:7001/eureka
+  instance:
+    instance-id: parkingcloud-zuul-9001   #自定义服务名称信息
+    prefer-ip-address: true   #访问路径可以显示IP地址
+    hostname: 192.168.1.128
+
+zuul:
+#  ignored-services: microservicecloud-dept    #原真实服务名忽略
+#  ignored-services: "*"    #忽略全部微服务名，只要是微服务名字就访问不了
+#  prefix: /atguigu     #设置统一公共前缀
+  routes:
+   parkingcloud-user: /user-api/**
+   parkingcloud-info: /infos-api/**
+   parkingcloud-infoimage: /infoImage-api/**
+   parkingcloud-temp: /temp-api/**
+   parkingcloud-review: /review-api/**
+#    parkingcloud-user: /user-api/**
+
+#    mydept.serviceId: parkingcloud-user
+#    mydept.path: /**
+
+info:
+  app.name: parkingcloud
+  company.name: cn.edu.lingnan
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+#不加这段会抛出zuulException timed-out and no fallback available
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+# 断路器超时时间, 默认时间很短, 如果微服务调用时间过长就会调用fallback提示微服务挂了
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000

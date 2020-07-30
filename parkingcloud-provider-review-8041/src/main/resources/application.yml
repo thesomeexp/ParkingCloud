@@ -1,0 +1,55 @@
+server:
+  port: 8041
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+  type-aliases-package: cn.edu.lingnan.entity    # 所有Entity别名类所在包
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+
+spring:
+  application:
+    name: parkingcloud-review
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: com.mysql.jdbc.Driver            # mysql驱动包
+    url: jdbc:mysql://192.168.1.67:3306/parking?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false              # 数据库名称
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://192.168.1.128:7001/eureka/
+  instance:
+    instance-id: parkingcloud-provider-review-8041  #自定义服务名称信息
+    prefer-ip-address: true    #访问路径可以显示IP地址
+    hostname: 192.168.1.128
+
+info:
+  app.name: parkingcloud
+  company.name: cn.edu.lingnan
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+#负载均衡
+ribbon:
+  eureka:
+    enabled: true
