@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -97,6 +98,20 @@ public class InfoServiceImpl implements InfoService {
     public int updateT(int pid, String parameterT, int valueT) {
         System.out.println("shijian: "+Calendar.getInstance().getTime());
         return this.infoDao.updateT(pid, parameterT, valueT, System.currentTimeMillis());
+    }
+
+    @Override
+    public HashMap<String, Integer> getHomeData() {
+        int sum = infoDao.countAll();
+        int verified = infoDao.countVerified();
+        int no_verified = infoDao.countNoVerified();
+        int disable = infoDao.countDisable();
+        HashMap<String, Integer> hm = new HashMap<>();
+        hm.put("sum", sum);
+        hm.put("verified", verified);
+        hm.put("no_verified", no_verified);
+        hm.put("disable", disable);
+        return hm;
     }
 
 }

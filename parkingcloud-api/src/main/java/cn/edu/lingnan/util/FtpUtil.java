@@ -22,7 +22,7 @@ public class FtpUtil {
      * FTP_BASE_PATH: ftp 服务器存储图片的绝对路径
      * IMAGE_BASE_URL: ftp 服务器外网访问图片路径
      */
-    private static String FTP_ADDRESS = "192.168.1.67";
+    private static String FTP_ADDRESS = "192.168.1.68";
 
     private static Integer FTP_PORT = 21;
 

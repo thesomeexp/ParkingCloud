@@ -34,11 +34,11 @@ spring:
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
-      defaultZone: http://192.168.1.128:7001/eureka/
+      defaultZone: http://0.0.0.0:7001/eureka/
   instance:
     instance-id: parkingcloud-provider-info-8021  #自定义服务名称信息
     prefer-ip-address: true    #访问路径可以显示IP地址
-    hostname: 192.168.1.128
+    hostname: 0.0.0.0
 
 info:
   app.name: parkingcloud

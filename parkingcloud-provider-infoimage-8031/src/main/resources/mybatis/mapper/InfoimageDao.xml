@@ -30,7 +30,7 @@
     <select id="queryAll" resultMap="InfoimageMap">
         select
           id, pid, uid, submitDate, state
-        from parking.infoimage
+        from parking.infoImage
         <where>
             <if test="id != null">
                 and id = #{id}

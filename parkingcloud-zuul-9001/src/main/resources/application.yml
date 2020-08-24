@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002  # 我的9001被ms占了
 
 
 
@@ -10,11 +10,11 @@ spring:
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
-      defaultZone: http://192.168.1.128:7001/eureka
+      defaultZone: http://0.0.0.0:7001/eureka
   instance:
     instance-id: parkingcloud-zuul-9001   #自定义服务名称信息
     prefer-ip-address: true   #访问路径可以显示IP地址
-    hostname: 192.168.1.128
+    hostname: 0.0.0.0
 
 zuul:
 #  ignored-services: microservicecloud-dept    #原真实服务名忽略

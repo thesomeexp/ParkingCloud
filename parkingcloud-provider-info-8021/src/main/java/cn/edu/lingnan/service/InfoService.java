@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,4 +28,6 @@ public interface InfoService {
     int update(Info info);//管理员验证停车位
 
     int updateT(int pid, String parameterT, int valueT);// 更新T的值
+
+    HashMap<String, Integer> getHomeData();
 }

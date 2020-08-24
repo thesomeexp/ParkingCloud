@@ -501,6 +501,32 @@ public class InfoController {
         }
     }
 
+    /**
+     * 管理员首页
+     */
+
+    @GetMapping("/admin/home")
+    public Result home(HttpServletRequest request) {
+        boolean isAdmin;
+        int uid;
+        try {
+            String header = request.getHeader(JWTConfig.HEADER_TOKEN_KEY);
+            System.out.println("header: " + header);
+            String token = header.replace(JWTConfig.TOKEN_PREFIX, "");
+            System.out.println(token);
+            uid = MyTool.getUserId(token);
+            isAdmin = MyTool.isAdmin(token);
+        } catch (NullPointerException e) {
+            return Result.fail(MagicVariable.UN_LOGIN);
+        }
+        if (isAdmin) {
+            HashMap<String, Integer> result = infoService.getHomeData();
+            return Result.success(result);
+        } else {
+            return Result.fail(MagicVariable.NOT_ADMIN);
+        }
+    }
+
     /*管理员删除通过ID删除停车位*/
    /* @DeleteMapping("/admin/infos/{pid}")
     public Result deleteInfos(@PathVariable Integer pid,HttpServletRequest request){

@@ -294,4 +294,20 @@
         delete from parking.info where id = #{id}
     </delete>
 
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(id) from info
+    </select>
+    <select id="countVerified" resultType="java.lang.Integer">
+        select count(id) from info where state='verified';
+    </select>
+    <select id="countNoVerified" resultType="java.lang.Integer">
+        select count(id) from info where state='no_verified';
+    </select>
+    <select id="countDisable" resultType="java.lang.Integer">
+        select count(id) from info where state='disable';
+    </select>
+
+
+
 </mapper>

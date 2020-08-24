@@ -68,4 +68,12 @@ public interface InfoDao {
 
     int updateT(@Param("pid")int pid, @Param("parameterT")String parameterT, @Param("valueT")int valueT,
                 @Param("stateupdatedate") long stateUpdateDate);
+
+    int countAll();
+
+    int countNoVerified();
+
+    int countVerified();
+
+    int countDisable();
 }
